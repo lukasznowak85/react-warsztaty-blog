@@ -1,7 +1,9 @@
-import {SEARCH} from '../../actionTypes';
+import {SEARCH, ATTACH_POSTS, SET_LOADING} from '../../actionTypes';
 
 const defaultState = {
-  searchVal: ''
+  searchVal: '',
+  posts: [],
+  loading: false
 };
 
 const blogReducer = (state = defaultState, action) => {
@@ -10,6 +12,10 @@ const blogReducer = (state = defaultState, action) => {
   switch (type) {
     case SEARCH:
       return {...state, searchVal: payload};
+    case ATTACH_POSTS:
+      return {...state, posts: payload};
+    case SET_LOADING:
+      return {...state, loading: payload};
     default:
       return state;
   }

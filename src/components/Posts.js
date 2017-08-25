@@ -3,6 +3,7 @@ import {customFetch} from '../services/fetch';
 import PropTypes from 'prop-types';
 import Post from './Post';
 import {connect} from 'react-redux';
+import {attachPosts, setLoading} from '../store/data/blog/actions';
 
 class Posts extends Component {
   constructor(props) {
@@ -24,18 +25,18 @@ class Posts extends Component {
   }
 
   componentDidMount() {
-    this.setState({loading: true})
+    this.props.setLoading(true)
 
     customFetch('https://jsonplaceholder.typicode.com/posts')
       .then((res) => res.json())
       .then((postsData) => {
-        this.setState({posts: postsData})
-        this.setState({loading: false})
+        this.props.attachPosts(postsData)
+        this.props.setLoading(false)
       })
   }
 
   render() {
-    const {posts, loading} = this.state;
+    const {posts, loading} = this.props;
     const {filter} = this.state;
 
     const filteredPosts = posts.reduce((acc, post) => {
@@ -68,8 +69,15 @@ Posts.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    filter: state.blog.searchVal
+    filter: state.blog.searchVal,
+    posts: state.blog.posts,
+    loading: state.blog.loading,
   }
 };
 
-export default connect(mapStateToProps)(Posts);
+const mapDispatchToProps = {
+  setLoading,
+  attachPosts
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Posts);
