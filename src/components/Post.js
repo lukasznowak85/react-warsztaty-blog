@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Post = props => {
   const {id, title, body} = props.post;

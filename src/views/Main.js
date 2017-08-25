@@ -14,7 +14,7 @@ class Main extends Component {
         Search: <br/><Search />
         <br/>
         <br/>
-        Lista postów:
+        Posts list:
         <br/><Posts />
       </div>
     )
