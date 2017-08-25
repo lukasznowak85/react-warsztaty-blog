@@ -1,13 +1,10 @@
-import React, {Component} from 'react';
+import React from 'react';
+import Main from '../views/Main';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="app">
-        elo
-      </div>
-    )
-  }
+const App = props => {
+  return (
+    <Main/>
+  )
 }
 
 export default App;
