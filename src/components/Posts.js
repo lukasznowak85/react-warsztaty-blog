@@ -12,13 +12,18 @@ class Posts extends Component {
   }
 
   componentDidMount() {
+    this.setState({loading: true})
+
     customFetch('https://jsonplaceholder.typicode.com/posts')
       .then((res) => res.json())
-      .then((postsData) => this.setState({posts: postsData}))
+      .then((postsData) => {
+        this.setState({posts: postsData})
+        this.setState({loading: false})
+      })
   }
 
   render() {
-    const {posts} = this.state;
+    const {posts, loading} = this.state;
     const {filter} = this.props;
 
     const filteredPosts = posts.reduce((acc, post) => {
@@ -33,7 +38,7 @@ class Posts extends Component {
 
     return (
       <div className="posts">
-        Filter: {filter}
+        {loading ? 'Loading...' : 'Loaded!!!' }
         {filteredPosts}
         {/* {posts
           .filter(post => {

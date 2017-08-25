@@ -1,3 +1,9 @@
 export function customFetch() {
-  return fetch(...arguments);
+  return fetch(...arguments)
+  .then(response =>  new Promise((res, rej) => {
+      setTimeout(() => {
+        res(response);
+      }, 2000);
+    })
+  )
 }
