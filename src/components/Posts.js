@@ -5,6 +5,7 @@ import Post from './Post';
 class Posts extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       posts: []
     }
@@ -13,18 +14,21 @@ class Posts extends Component {
   componentDidMount() {
     customFetch('https://jsonplaceholder.typicode.com/posts')
       .then((res) => res.json())
-      .then((postsData) => {
-        console.log('postsData', postsData)
-        this.setState({posts: postsData})
-      })
+      .then((postsData) => this.setState({posts: postsData}))
   }
 
   render() {
-    const posts = this.state.posts;
+    const {posts} = this.state;
+    const {filter} = this.props;
 
     return (
       <div className="posts">
-        {posts.map(post => <Post key={post.id} post={post}/>)}
+        Filter: {filter}
+        {posts
+          .filter(post => {
+            return post.title.indexOf(filter) !== -1 || post.body.indexOf(filter) !== -1;
+          })
+          .map(post => <Post key={post.id} post={post}/>)}
       </div>
     )
   }

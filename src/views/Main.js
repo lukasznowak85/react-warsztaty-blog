@@ -6,16 +6,25 @@ class Main extends Component {
   constructor(props) {
     super(props);
     
+    this.state = {
+      filter: ''
+    };
+
+    this.onSearch = this.onSearch.bind(this);
+  }
+
+  onSearch(value) {
+    this.setState({filter: value});
   }
 
   render() {
     return (
       <div className="main">
-        Search: <br/><Search />
+        Search: <br/><Search onSearch={this.onSearch}/>
         <br/>
         <br/>
         Posts list:
-        <br/><Posts />
+        <br/><Posts filter={this.state.filter}/>
       </div>
     )
   }

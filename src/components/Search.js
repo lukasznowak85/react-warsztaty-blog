@@ -5,8 +5,10 @@ class Search extends Component {
     super(props);
 
     this.state = {
-      text: 'lorem'
+      text: ''
     }
+
+    this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange(event) {
@@ -14,6 +16,7 @@ class Search extends Component {
     const newState = {text: value};
 
     this.setState(newState);
+    this.props.onSearch(value);
   }
   
   render() {
@@ -23,7 +26,7 @@ class Search extends Component {
         <input
           type="text"
           value={text}
-          onChange={event => this.handleChange(event)}
+          onChange={this.handleChange}
         />
       </div>
     )
