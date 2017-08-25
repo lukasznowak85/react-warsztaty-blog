@@ -1,26 +1,23 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {search} from '../store/data/blog/actions';
 
 class Search extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      text: ''
-    }
-
     this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange(event) {
     const value = event.target.value;
-    const newState = {text: value};
 
-    this.setState(newState);
+    this.props.search(value);
     this.props.onSearch(value);
   }
   
   render() {
-    let text = this.state.text;
+    let {text} = this.props;
     return (
       <div className="search">
         <input
@@ -33,4 +30,19 @@ class Search extends Component {
   }
 }
 
-export default Search;
+Search.propTypes = {
+  onSearch: PropTypes.func.isRequired,
+  text: PropTypes.string
+};
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    text: state.blog.searchVal
+  }
+};
+
+const mapDispatchToProps = {
+  search
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
