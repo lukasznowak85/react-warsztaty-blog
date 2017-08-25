@@ -9,8 +9,18 @@ class Posts extends Component {
     super(props);
 
     this.state = {
-      posts: []
+      posts: [],
+      filter: props.filter
     }
+
+    this.filterTimeout = undefined;
+  }
+
+  componentWillReceiveProps(nextProps) {
+    clearTimeout(this.filterTimeout);
+    this.filterTimeout = setTimeout(() => {
+      this.setState({filter: nextProps.filter});
+    }, 1000)
   }
 
   componentDidMount() {
@@ -26,7 +36,7 @@ class Posts extends Component {
 
   render() {
     const {posts, loading} = this.state;
-    const {filter} = this.props;
+    const {filter} = this.state;
 
     const filteredPosts = posts.reduce((acc, post) => {
       const {title, body} = post;
