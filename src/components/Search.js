@@ -13,7 +13,6 @@ class Search extends Component {
     const value = event.target.value;
 
     this.props.search(value);
-    this.props.onSearch(value);
   }
   
   render() {
@@ -31,7 +30,6 @@ class Search extends Component {
 }
 
 Search.propTypes = {
-  onSearch: PropTypes.func.isRequired,
   text: PropTypes.string
 };
 
