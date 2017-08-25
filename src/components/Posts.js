@@ -1,22 +1,23 @@
 import React, {Component} from 'react';
-import {customFetch} from '../services/fetch';
+// import {customFetch} from '../services/fetch';
 import {getPosts} from '../services/posts';
 import PropTypes from 'prop-types';
 import Post from './Post';
 import {connect} from 'react-redux';
-import {attachPosts, setLoading} from '../store/data/blog/actions';
+// import {attachPosts, setLoading} from '../store/data/blog/actions';
 
 class Posts extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      posts: [],
+      loading: false,
+      // posts: [],
       filter: props.filter
     }
 
     this.filterTimeout = undefined;
-    this.loadPosts = this.loadPosts.bind(this);
+    // this.loadPosts = this.loadPosts.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -27,22 +28,7 @@ class Posts extends Component {
   }
 
   componentDidMount() {
-    if(!this.props.posts){ 
-     this.loadPosts();
-    }
-  }
-
-  loadPosts() {
-    // this.props.setLoading(true);
-    this.props.attachPosts(getPosts());
-    // this.props.setLoading(false);
-
-    // customFetch('https://jsonplaceholder.typicode.com/posts')
-    // .then((res) => res.json())
-    // .then((postsData) => {
-    //   this.props.attachPosts(postsData)
-    //   this.props.setLoading(false)
-    // })
+    this.props.getPosts();
   }
 
   render() {
@@ -78,16 +64,16 @@ Posts.propTypes = {
 };
 
 const mapStateToProps = (state) => {
+  const {posts,searchVal, loading} = state.blog;
   return {
-    filter: state.blog.searchVal,
-    posts: state.blog.posts,
-    loading: state.blog.loading,
+    filter: searchVal,
+    posts,
+    loading
   }
 };
 
 const mapDispatchToProps = {
-  setLoading,
-  attachPosts
+  getPosts
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);
