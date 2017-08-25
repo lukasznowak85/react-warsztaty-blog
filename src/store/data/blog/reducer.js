@@ -2,7 +2,7 @@ import {SEARCH, ATTACH_POSTS, SET_LOADING} from '../../actionTypes';
 
 const defaultState = {
   searchVal: '',
-  posts: [],
+  posts: undefined,
   loading: false
 };
 

@@ -25,21 +25,23 @@ class Posts extends Component {
   }
 
   componentDidMount() {
-    this.props.setLoading(true)
-
-    customFetch('https://jsonplaceholder.typicode.com/posts')
+    if(!this.props.posts){ 
+      this.props.setLoading(true)
+      
+      customFetch('https://jsonplaceholder.typicode.com/posts')
       .then((res) => res.json())
       .then((postsData) => {
         this.props.attachPosts(postsData)
         this.props.setLoading(false)
       })
+    }
   }
 
   render() {
     const {posts, loading} = this.props;
     const {filter} = this.state;
 
-    const filteredPosts = posts.reduce((acc, post) => {
+    const filteredPosts = posts && posts.reduce((acc, post) => {
       const {title, body} = post;
       if (title.includes(filter) || body.includes(filter)) {
         acc.push(
