@@ -27,7 +27,7 @@ class Posts extends Component {
     const {filter} = this.props;
 
     const filteredPosts = posts.reduce((acc, post) => {
-      const {id, title, body} = post;
+      const {title, body} = post;
       if (title.includes(filter) || body.includes(filter)) {
         acc.push(
           <Post key={post.id} post={post}/>
