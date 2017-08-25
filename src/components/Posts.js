@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {customFetch} from '../services/fetch';
+import {getPosts} from '../services/posts';
 import PropTypes from 'prop-types';
 import Post from './Post';
 import {connect} from 'react-redux';
@@ -15,6 +16,7 @@ class Posts extends Component {
     }
 
     this.filterTimeout = undefined;
+    this.loadPosts = this.loadPosts.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -26,15 +28,21 @@ class Posts extends Component {
 
   componentDidMount() {
     if(!this.props.posts){ 
-      this.props.setLoading(true)
-      
-      customFetch('https://jsonplaceholder.typicode.com/posts')
-      .then((res) => res.json())
-      .then((postsData) => {
-        this.props.attachPosts(postsData)
-        this.props.setLoading(false)
-      })
+     this.loadPosts();
     }
+  }
+
+  loadPosts() {
+    // this.props.setLoading(true);
+    this.props.attachPosts(getPosts());
+    // this.props.setLoading(false);
+
+    // customFetch('https://jsonplaceholder.typicode.com/posts')
+    // .then((res) => res.json())
+    // .then((postsData) => {
+    //   this.props.attachPosts(postsData)
+    //   this.props.setLoading(false)
+    // })
   }
 
   render() {
