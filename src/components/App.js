@@ -17,11 +17,12 @@ const App = props => {
           return (
             <span>Are you on details? {match ? 'Yes' : 'No'}</span>
           )
-        }}/>
+        }}
+        />
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/main"/>} />
-          <Route path="/main" component={Main} />
-          <Route path="/details" component={Main} />
+          <Route exact strict path="/main" component={Main} />
+          <Route exact strict path="/details/:id" component={Details} />
           <Route component={NotFound} />
         </Switch>
       </div>
