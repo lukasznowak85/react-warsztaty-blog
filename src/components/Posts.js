@@ -21,14 +21,25 @@ class Posts extends Component {
     const {posts} = this.state;
     const {filter} = this.props;
 
+    const filteredPosts = posts.reduce((acc, post) => {
+      const {id, title, body} = post;
+      if (title.includes(filter) || body.includes(filter)) {
+        acc.push(
+          <Post key={post.id} post={post}/>
+        )
+      }
+      return acc;
+    }, [])
+
     return (
       <div className="posts">
         Filter: {filter}
-        {posts
+        {filteredPosts}
+        {/* {posts
           .filter(post => {
-            return post.title.indexOf(filter) !== -1 || post.body.indexOf(filter) !== -1;
+            return post.title.includes(filter) || post.body.includes(filter);
           })
-          .map(post => <Post key={post.id} post={post}/>)}
+          .map(post => <Post key={post.id} post={post}/>)} */}
       </div>
     )
   }
