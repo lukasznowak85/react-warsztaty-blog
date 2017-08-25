@@ -20,8 +20,8 @@ const App = props => {
         }}/>
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/main"/>} />
-          <Route exact strict path="/main" component={Main} />
-          <Route exact strict path="/details/:id" component={Details} />
+          <Route path="/main" component={Main} />
+          <Route path="/details" component={Main} />
           <Route component={NotFound} />
         </Switch>
       </div>
