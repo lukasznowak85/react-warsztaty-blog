@@ -3,7 +3,7 @@ export function customFetch() {
   .then(response =>  new Promise((res, rej) => {
       setTimeout(() => {
         res(response);
-      }, 2000);
+      }, 200);
     })
   )
 }
