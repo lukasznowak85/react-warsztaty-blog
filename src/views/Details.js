@@ -30,13 +30,14 @@ class Details extends Component  {
     const to = "/main";
     return (
       <div className="details">
-      {loading ? 'Loading' : 
-        <div>
-          <h3>{id}: {title}</h3>
-          <p>{body}</p>
-          <br/>
-          <Link to={to}>Go back to main</Link>
-        </div>}
+
+        {title ? <h3>{title}</h3> : null}
+        {body ? <p>{body}</p> : null}
+        {loading ? 'Loading' : null}
+        <br/>
+        <Link to={to}>Go back to main</Link>
+
+        
       </div>
     )
   }
