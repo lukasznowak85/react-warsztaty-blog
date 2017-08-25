@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {debounce} from 'lodash';
 import Search from '../components/Search';
 import Posts from '../components/Posts';
 
@@ -20,7 +21,7 @@ class Main extends Component {
   render() {
     return (
       <div className="main">
-        Search: <br/><Search onSearch={this.onSearch}/>
+        Search: <br/><Search onSearch={debounce(this.onSearch, 300)}/>
         <br/>
         <br/>
         Posts list:
