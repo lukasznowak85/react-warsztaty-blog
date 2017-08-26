@@ -21,6 +21,11 @@ export const setLoading = (loading) => {
   }
 }
 
+// jako redux-action
+// export const attachPosts = createAction(ATTACH_POSTS);
+// export const search = createAction(SEARCH);
+// export const setLoading = createAction(SET_LOADING);
+
 // jako redux-actions
 // export const { attachPosts, search, setLoading} = createActions(
 //   ATTACH_POSTS,

@@ -33,6 +33,6 @@ const blogReducer = (state = defaultState, action) => {
 //     return state
 //   }
 // }
-// })
+// }, defaultState)
 
 export default blogReducer;
