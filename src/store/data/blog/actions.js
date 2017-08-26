@@ -1,8 +1,9 @@
-import {SEARCH, ATTACH_POSTS, SET_LOADING} from '../../actionTypes';
+import {SEARCH, ATTACH_POSTS, SET_LOADING, ATTACH_COMMENTS} from '../../actionTypes';
 import {createAction} from 'redux-actions';
 
 // jako redux-action
 export const attachPosts = createAction(ATTACH_POSTS);
+export const attachComments = createAction(ATTACH_COMMENTS);
 export const search = createAction(SEARCH);
 export const setLoading = createAction(SET_LOADING);
 

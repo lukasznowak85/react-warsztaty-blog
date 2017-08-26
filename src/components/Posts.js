@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
-// import {customFetch} from '../services/fetch';
 import {getPosts} from '../services/posts';
 import PropTypes from 'prop-types';
 import Post from './Post';
 import {connect} from 'react-redux';
-// import {attachPosts, setLoading} from '../store/data/blog/actions';
 
 class Posts extends Component {
   constructor(props) {
@@ -12,12 +10,10 @@ class Posts extends Component {
 
     this.state = {
       loading: false,
-      // posts: [],
       filter: props.filter
     }
 
     this.filterTimeout = undefined;
-    // this.loadPosts = this.loadPosts.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {

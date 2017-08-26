@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {getPosts} from '../services/posts';
+import {getPosts, getCommentsForPost} from '../services/posts';
 import PostEditForm from '../components/PostEditForm';
+import Comment from '../components/Comment';
 
 class Details extends Component  {
   constructor(props) {
@@ -17,6 +18,7 @@ class Details extends Component  {
   
   componentDidMount() {
     this.props.getPosts();
+    this.props.getCommentsForPost(this.props.post.id);
   }
 
   onSubmit(values){
@@ -28,7 +30,12 @@ class Details extends Component  {
   }
   
   render() {
-    const {post} = this.props;
+    const {post, comments} = this.props;
+    const commentsComponents = [];
+    comments.forEach(comment => {
+      commentsComponents.push(<Comment comment={comment} key={comment.id}/>)
+    });
+
     return (
       <div className="details">
         <PostEditForm onSubmit={this.onSubmit} onSubmitFail={this.onSubmitFail} />
@@ -39,6 +46,9 @@ class Details extends Component  {
         <Link to="/main">Go back to main</Link>
         <br/>
         <button onClick={() => this.goTo('/main')}>Back to main</button>
+        <br/>
+        Comments section:
+        {commentsComponents}
       </div>
     )
   }
@@ -47,13 +57,26 @@ class Details extends Component  {
 const mapStateToProps = (state, ownProps) => {
   const {id} = ownProps.match.params;
   const {posts} = state.blog;
+  const currentPost = posts && posts.find(el => el.id === parseInt(id, 10))
+
+  const {comments:allComments} = state.blog;
+  const {comments:commentsForPost} = currentPost;
+  const comments = [];
+  if(commentsForPost) {
+    commentsForPost.forEach(commentId => {
+      return comments.push(allComments[commentId]);
+    });
+  }
+      
   return {
-    post: posts && posts.find(el => el.id === parseInt(id, 10))
+    post: currentPost,
+    comments: comments
   }
 };
 
 const mapDispatchToProps = {
-  getPosts
+  getPosts,
+  getCommentsForPost
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Details);
