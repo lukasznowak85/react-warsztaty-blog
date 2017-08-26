@@ -24,11 +24,15 @@ class Details extends Component  {
     console.log('elo, submitted', values)
   }
   
+  onSubmitFail(values){
+    console.log('elo, submitted fail', values)
+  }
+  
   render() {
     const {post} = this.props;
     return (
       <div className="details">
-        <PostEditForm onSubmit={this.onSubmit}/>
+        <PostEditForm onSubmit={this.onSubmit} onSubmitFail={this.onSubmitFail} />
 
         {post ? <h3>{post.title}</h3> : null}
         {post ? <p>{post.body}</p> : null}
