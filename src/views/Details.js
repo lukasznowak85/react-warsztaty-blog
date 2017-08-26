@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {customFetch} from '../services/fetch';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getPosts} from '../services/posts';
