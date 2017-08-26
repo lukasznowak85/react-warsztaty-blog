@@ -13,12 +13,12 @@ const App = props => {
   return (
     <Router>
       <div className="app">
-        <Route path="/details" children={({ match }) => {
+        {/* <Route path="/details" children={({ match }) => {
           return (
             <span>Are you on details? {match ? 'Yes' : 'No'}</span>
           )
         }}
-        />
+        /> */}
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/main" />} />
           <Route exact strict path="/main" component={Main} />

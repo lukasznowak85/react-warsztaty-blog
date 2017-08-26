@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getPosts, getCommentsForPost } from '../services/posts';
-import PostEditForm from '../components/PostEditForm';
 import Comment from '../components/Comment';
+import FlatButton from 'material-ui/FlatButton';
+import { Card, CardHeader, CardText } from 'material-ui/Card';
 
 class Details extends Component {
   constructor(props) {
@@ -38,16 +38,21 @@ class Details extends Component {
 
     return (
       <div className="details">
-        <PostEditForm onSubmit={this.onSubmit} onSubmitFail={this.onSubmitFail} />
-
-        {post ? <h3>{post.title}</h3> : null}
-        {post ? <p>{post.body}</p> : null}
+        {/* <PostEditForm onSubmit={this.onSubmit} onSubmitFail={this.onSubmitFail} /> */}
+        {post ?
+        <div>
+          <h1>Single blog post</h1>
+          <Card>
+            <CardHeader subtitle={post.title} />
+            <CardText>{post.body}</CardText>
+          </Card>
+        </div> : null}
         <br />
-        <Link to="/main">Go back to main</Link>
+        {/* <Link to="/main"><FlatButton primary={true}>Go back to main</FlatButton></Link> */}
         <br />
-        <button onClick={() => this.goTo('/main')}>Back to main</button>
+        <FlatButton label="Back to main" secondary={true} onClick={() => this.goTo('/main')}/>
         <br />
-        Comments section:
+        <h4>Comments:</h4>
         {commentsComponents}
       </div>
     )
