@@ -28,7 +28,7 @@ class Details extends Component  {
         <br/>
         <Link to="/main">Go back to main</Link>
         <br/>
-        <button onClick={() => this.goTo('/main')}>Back to main</button>  
+        <button onClick={() => this.goTo('/main')}>Back to main</button>
       </div>
     )
   }

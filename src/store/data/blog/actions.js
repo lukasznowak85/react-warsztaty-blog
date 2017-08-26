@@ -20,3 +20,10 @@ export const setLoading = (loading) => {
     payload: loading
   }
 }
+
+// jako redux-actions
+// export const { attachPosts, search, setLoading} = createActions(
+//   ATTACH_POSTS,
+//   SEARCH,
+//   SET_LOADING
+// )

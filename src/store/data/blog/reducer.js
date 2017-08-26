@@ -21,4 +21,18 @@ const blogReducer = (state = defaultState, action) => {
   }
 };
 
+// jako redux-axtions
+// const blogReducer = handeActions({
+//   [SEARCH]: (state, {payload}) => ({...state, searchVal: payload}),
+//   [ATTACH_POSTS]...,
+//   [SET_LOADING]
+// [ATTACH_POSTS]: {
+//   next: (state, {payload}) => ({...state, posts: payload}),
+//   throw: (state, {payload}) => {
+//     console.log('some error');
+//     return state
+//   }
+// }
+// })
+
 export default blogReducer;
