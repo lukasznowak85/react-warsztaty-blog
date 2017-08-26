@@ -3,6 +3,7 @@ import {customFetch} from '../services/fetch';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getPosts} from '../services/posts';
+import PostEditForm from '../components/PostEditForm';
 
 class Details extends Component  {
   constructor(props) {
@@ -18,11 +19,17 @@ class Details extends Component  {
   componentDidMount() {
     this.props.getPosts();
   }
+
+  onSubmit(values){
+    console.log('elo, submitted', values)
+  }
   
   render() {
     const {post} = this.props;
     return (
       <div className="details">
+        <PostEditForm onSubmit={this.onSubmit}/>
+
         {post ? <h3>{post.title}</h3> : null}
         {post ? <p>{post.body}</p> : null}
         <br/>
@@ -32,7 +39,7 @@ class Details extends Component  {
       </div>
     )
   }
-}
+};
 
 const mapStateToProps = (state, ownProps) => {
   const {id} = ownProps.match.params;
