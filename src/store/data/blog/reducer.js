@@ -1,4 +1,5 @@
 import {SEARCH, ATTACH_POSTS, SET_LOADING} from '../../actionTypes';
+import {handleActions} from 'redux-actions';
 
 const defaultState = {
   searchVal: '',
@@ -6,33 +7,25 @@ const defaultState = {
   loading: false
 };
 
-const blogReducer = (state = defaultState, action) => {
-  const {type, payload} = action;
+// jako redux-actions
+const blogReducer = handleActions({
+  [SEARCH]: (state, {payload}) => ({...state, searchVal: payload}),
+  [ATTACH_POSTS]: (state, {payload}) => ({...state, posts: payload}),
+  [SET_LOADING]: (state, {payload}) => ({...state, loading: payload})
+}, defaultState);
 
-  switch (type) {
-    case SEARCH:
-      return {...state, searchVal: payload};
-    case ATTACH_POSTS:
-      return {...state, posts: payload};
-    case SET_LOADING:
-      return {...state, loading: payload};
-    default:
-      return state;
-  }
-};
-
-// jako redux-axtions
-// const blogReducer = handeActions({
-//   [SEARCH]: (state, {payload}) => ({...state, searchVal: payload}),
-//   [ATTACH_POSTS]...,
-//   [SET_LOADING]
-// [ATTACH_POSTS]: {
-//   next: (state, {payload}) => ({...state, posts: payload}),
-//   throw: (state, {payload}) => {
-//     console.log('some error');
-//     return state
+// const blogReducer = (state = defaultState, action) => {
+//   const {type, payload} = action;
+//   switch (type) {
+//     case SEARCH:
+//       return {...state, searchVal: payload};
+//     case ATTACH_POSTS:
+//       return {...state, posts: payload};
+//     case SET_LOADING:
+//       return {...state, loading: payload};
+//     default:
+//       return state;
 //   }
-// }
-// }, defaultState)
+// };
 
 export default blogReducer;
