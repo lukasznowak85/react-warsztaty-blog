@@ -13,9 +13,9 @@ import Post from '../components/Post';
 
 storiesOf('Post', module)
   .add('to Storybook', () => {
-    return(
+    return (
       <Router>
-        <Post post={{id:'1', title:'lorem title', body:'post body'}} />
+        <Post post={{ id: '1', title: 'lorem title', body: 'post body' }} />
       </Router>
     )
   })

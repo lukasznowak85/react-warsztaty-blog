@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {getPosts, getCommentsForPost} from '../services/posts';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getPosts, getCommentsForPost } from '../services/posts';
 import PostEditForm from '../components/PostEditForm';
 import Comment from '../components/Comment';
 
-class Details extends Component  {
+class Details extends Component {
   constructor(props) {
     super(props);
 
@@ -15,25 +15,25 @@ class Details extends Component  {
   goTo(path) {
     this.props.history.push(path)
   }
-  
+
   componentDidMount() {
     this.props.getPosts();
     this.props.getCommentsForPost(this.props.post.id);
   }
 
-  onSubmit(values){
+  onSubmit(values) {
     console.log('elo, submitted', values)
   }
-  
-  onSubmitFail(values){
+
+  onSubmitFail(values) {
     console.log('elo, submitted fail', values)
   }
-  
+
   render() {
-    const {post, comments} = this.props;
+    const { post, comments } = this.props;
     const commentsComponents = [];
     comments.forEach(comment => {
-      commentsComponents.push(<Comment comment={comment} key={comment.id}/>)
+      commentsComponents.push(<Comment comment={comment} key={comment.id} />)
     });
 
     return (
@@ -42,11 +42,11 @@ class Details extends Component  {
 
         {post ? <h3>{post.title}</h3> : null}
         {post ? <p>{post.body}</p> : null}
-        <br/>
+        <br />
         <Link to="/main">Go back to main</Link>
-        <br/>
+        <br />
         <button onClick={() => this.goTo('/main')}>Back to main</button>
-        <br/>
+        <br />
         Comments section:
         {commentsComponents}
       </div>
@@ -55,19 +55,19 @@ class Details extends Component  {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const {id} = ownProps.match.params;
-  const {posts} = state.blog;
+  const { id } = ownProps.match.params;
+  const { posts } = state.blog;
   const currentPost = posts && posts.find(el => el.id === parseInt(id, 10))
 
-  const {comments:allComments} = state.blog;
-  const {comments:commentsForPost} = currentPost;
+  const { comments: allComments } = state.blog;
+  const { comments: commentsForPost } = currentPost;
   const comments = [];
-  if(commentsForPost) {
+  if (commentsForPost) {
     commentsForPost.forEach(commentId => {
       return comments.push(allComments[commentId]);
     });
   }
-      
+
   return {
     post: currentPost,
     comments: comments

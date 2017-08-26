@@ -1,19 +1,19 @@
 import React from 'react';
-import {Field, reduxForm} from 'redux-form';
-import {connect} from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 
 const PostEditForm = props => {
-  const {handleSubmit} = props;
+  const { handleSubmit } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <Field name="myval" component="input" type="text"/>
+      <Field name="myval" component="input" type="text" />
     </form>
   )
 }
 
 const validate = values => {
   const errors = {};
-  const {myval} = values;
+  const { myval } = values;
 
   if (myval === 'test') {
     errors.myval = 'wrong val!'

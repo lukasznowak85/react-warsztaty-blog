@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {search} from '../store/data/blog/actions';
+import { connect } from 'react-redux';
+import { search } from '../store/data/blog/actions';
 
 class Search extends Component {
   constructor(props) {
@@ -14,9 +14,9 @@ class Search extends Component {
 
     this.props.search(value);
   }
-  
+
   render() {
-    let {text} = this.props;
+    let { text } = this.props;
     return (
       <div className="search">
         <input

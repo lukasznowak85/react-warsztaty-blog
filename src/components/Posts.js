@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {getPosts} from '../services/posts';
+import React, { Component } from 'react';
+import { getPosts } from '../services/posts';
 import PropTypes from 'prop-types';
 import Post from './Post';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 class Posts extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class Posts extends Component {
   componentWillReceiveProps(nextProps) {
     clearTimeout(this.filterTimeout);
     this.filterTimeout = setTimeout(() => {
-      this.setState({filter: nextProps.filter});
+      this.setState({ filter: nextProps.filter });
     }, 1000)
   }
 
@@ -28,14 +28,14 @@ class Posts extends Component {
   }
 
   render() {
-    const {posts, loading} = this.props;
-    const {filter} = this.state;
+    const { posts, loading } = this.props;
+    const { filter } = this.state;
 
     const filteredPosts = posts && posts.reduce((acc, post) => {
-      const {title, body} = post;
+      const { title, body } = post;
       if (title.includes(filter) || body.includes(filter)) {
         acc.push(
-          <Post key={post.id} post={post}/>
+          <Post key={post.id} post={post} />
         )
       }
       return acc;
@@ -43,7 +43,7 @@ class Posts extends Component {
 
     return (
       <div className="posts">
-        {loading ? 'Loading...' : 'Loaded!!!' }
+        {loading ? 'Loading...' : 'Loaded!!!'}
         {filteredPosts}
         {/* {posts
           .filter(post => {
@@ -60,7 +60,7 @@ Posts.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const {posts,searchVal, loading} = state.blog;
+  const { posts, searchVal, loading } = state.blog;
   return {
     filter: searchVal,
     posts,

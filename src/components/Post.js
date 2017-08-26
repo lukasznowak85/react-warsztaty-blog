@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Post = props => {
-  const {id, title, body} = props.post;
+  const { id, title, body } = props.post;
   const to = "/details/" + id;
 
   return (

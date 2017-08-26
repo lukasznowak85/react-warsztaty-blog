@@ -1,9 +1,9 @@
-import {customFetch} from './fetch'
-import {attachPosts, setLoading, attachComments} from '../store/data/blog/actions';
+import { customFetch } from './fetch'
+import { attachPosts, setLoading, attachComments } from '../store/data/blog/actions';
 
 export const getPosts = () => {
   return (dispatch, getState) => {
-    const {posts} = getState().blog;
+    const { posts } = getState().blog;
     if (posts) {
       return;
     }
@@ -29,7 +29,7 @@ export const getCommentsForPost = (postId) => {
         const commentsList = [];
 
         data.forEach(comment => {
-          const {id} = comment;
+          const { id } = comment;
           comments[id] = comment;
           commentsList.push(id);
         })
