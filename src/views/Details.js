@@ -18,7 +18,7 @@ class Details extends Component {
 
   componentDidMount() {
     this.props.getPosts();
-    this.props.getCommentsForPost(this.props.post.id);
+    this.props.getCommentsForPost(this.props.match.params.id);
   }
 
   onSubmit(values) {
@@ -63,16 +63,19 @@ const mapStateToProps = (state, ownProps) => {
   const { id } = ownProps.match.params;
   const { posts } = state.blog;
   const currentPost = posts && posts.find(el => el.id === parseInt(id, 10))
-
-  const { comments: allComments } = state.blog;
-  const { comments: commentsForPost } = currentPost;
   const comments = [];
-  if (commentsForPost) {
-    commentsForPost.forEach(commentId => {
-      return comments.push(allComments[commentId]);
-    });
-  }
 
+  if (currentPost) {
+    
+    const { comments: allComments } = state.blog;
+    const { comments: commentsForPost } = currentPost;
+    if (commentsForPost) {
+      commentsForPost.forEach(commentId => {
+        return comments.push(allComments[commentId]);
+      });
+    }
+    
+  }
   return {
     post: currentPost,
     comments: comments
