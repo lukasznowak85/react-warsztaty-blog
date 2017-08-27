@@ -43,8 +43,7 @@ class Posts extends Component {
 
     return (
       <div className="posts">
-        {loading ? 'Loading...' : 'Loaded!!!'}
-        {filteredPosts}
+        {loading ? 'Loading...' : filteredPosts}
         {/* {posts
           .filter(post => {
             return post.title.includes(filter) || post.body.includes(filter);

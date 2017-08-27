@@ -30,12 +30,12 @@ class Details extends Component {
   }
 
   render() {
-    const { post, comments } = this.props;
+    const { post, comments, loading } = this.props;
     const commentsComponents = [];
     comments.forEach(comment => {
       commentsComponents.push(<Comment comment={comment} key={comment.id} />)
     });
-
+    
     return (
       <div className="details">
         {/* <PostEditForm onSubmit={this.onSubmit} onSubmitFail={this.onSubmitFail} /> */}
@@ -52,8 +52,9 @@ class Details extends Component {
         <br />
         <FlatButton label="Back to main" secondary={true} onClick={() => this.goTo('/main')}/>
         <br />
+        {loading}
         <h4>Comments:</h4>
-        {commentsComponents}
+        {loading ? 'Loading comments...' : commentsComponents}
       </div>
     )
   }
@@ -61,7 +62,7 @@ class Details extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const { id } = ownProps.match.params;
-  const { posts } = state.blog;
+  const { posts, loading } = state.blog;
   const currentPost = posts && posts.find(el => el.id === parseInt(id, 10))
   const comments = [];
 
@@ -78,7 +79,8 @@ const mapStateToProps = (state, ownProps) => {
   }
   return {
     post: currentPost,
-    comments: comments
+    comments: comments, 
+    loading
   }
 };
 
